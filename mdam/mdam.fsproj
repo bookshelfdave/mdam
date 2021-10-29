@@ -11,4 +11,8 @@
         <Compile Include="MDAM.fs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\parser\parser.csproj" />
+    </ItemGroup>
+
 </Project>

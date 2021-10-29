@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.2" />
+        <PackageReference Include="Antlr4BuildTasks" Version="8.14.0">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="NUnit" Version="3.13.1" />
+        <PackageReference Include="NUnit.Console" Version="3.12.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Antlr4 Include="mdam.g4">
+            <Generator>MSBuild:Compile</Generator>
+            <Listener>true</Listener>
+            <Visitor>false</Visitor>
+            <GAtn>true</GAtn>
+            <Package>mdamparser</Package>
+            <Error>true</Error>
+            <DOptions>language=CSharp</DOptions>
+        </Antlr4>
+    </ItemGroup>
+
+    <!-- remove antlr4 generated file warnings -->
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <NoWarn>3021;1701;1702</NoWarn>
+    </PropertyGroup>
+    
+</Project>
