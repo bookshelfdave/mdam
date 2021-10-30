@@ -22,38 +22,29 @@ grammar mdam;
  */
 
 mdam_terms:
-    (mdam_term DOT)+;
+    (mdam_term)+;
 
-mdam_term:
-    mdam_atom
-    | mdam_int
-    | mdam_float
-    | mdam_string
-    ;
+mdam_term: mdam_structure   // f(t1..tn) 
+         | mdam_variable    // capital
+         ;
+         
+mdam_structure: struct_name=ID LPAREN (subterms+=mdam_term (COMMA subterms+=mdam_term)*)? RPAREN;
+mdam_variable: VARID;
 
-mdam_int:         INT;
-mdam_float:       FLOAT;
-mdam_string:      STRING;
-mdam_atom:        ID | IDSTRING;
-mdam_tuple:       LCURLY (tupleitems+=mdam_term (COMMA tupleitems+=mdam_term)*)? RCURLY;
 
 COMMA:         ',';
 LSQUARE:       '[';
 RSQUARE:       ']';
-//MAPOP:         '=>';
+
+LPAREN:        '(';
+RPAREN:        ')';
 LCURLY:        '{';
 RCURLY:        '}';
-//LESSTHAN:      '<';
-//GREATERTHAN:   '>';
-//COLON:         ':';
-//TRUE:          'true';
-//FALSE:         'false';
-//AT:            '@';
-//HASH:          '#';
 DOT:           '.';
 
 ID          :       [a-z][A-Za-z0-9]*;
-IDSTRING  :  '\'' (IDESC|.)*? '\'';
+VARID       :       [A-Z][A-Za-z0-9]*;
+
 
 fragment IDESC : '\\\'' | '\\\\' ;
 
