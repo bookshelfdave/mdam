@@ -37,5 +37,5 @@ module CLI =
         
     [<EntryPoint>]
     let main args =
-        TermParser.run "f(X,y(A,B,C))" |> ignore
+        TermParser.parseTermToRegs " p(Z, h(Z, W), f(W)) " |> ignore
         0

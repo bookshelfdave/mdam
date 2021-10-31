@@ -35,7 +35,6 @@ mdam_variable: VARID;
 COMMA:         ',';
 LSQUARE:       '[';
 RSQUARE:       ']';
-
 LPAREN:        '(';
 RPAREN:        ')';
 LCURLY:        '{';

@@ -2,31 +2,33 @@ module Tests
 
 open NUnit.Framework
 open mdam.CLI
+open mdam.AST
+open mdam.TermParser
 
 [<SetUp>]
 let Setup () =
     ()
-//
-//[<Test>]
-//let TestTerm () =
-//    let x = Term.Str 1
-//    Assert.AreEqual("STR 1", x.Rep)
-//    let x = Term.Ref 50
-//    Assert.AreEqual("REF 50", x.Rep)
-//    let x = Term.Functor ("f", 2uy)
-//    Assert.AreEqual("f/2", x.Rep)
-//    
-//    
-//[<Test>]
-//let TestHeap () =
-//    let h = Heap(1024)
-//    let result = h.Append <| Term.Str 1
-//    
-//    match result with
-//        | Ok n ->
-//                Assert.AreEqual(0, n)
-//                Assert.AreEqual(1, h.ElementCount)
-//        | Error e -> Assert.Fail(e)
-//    
-//    Assert.Pass()
-//    
+
+[<Test>]
+let TestParseL0TermToRegs () =
+    let (exprRegs, regs) = parseTermToRegs("p(Z, h(Z, W), f(W))")    
+    
+    Assert.AreEqual(1, regs.["p/3"])
+    Assert.AreEqual(2, regs.["Z"])
+    Assert.AreEqual(3, regs.["h/2"])
+    Assert.AreEqual(4, regs.["f/1"])
+    Assert.AreEqual(5, regs.["W"])
+    Assert.Pass()
+
+
+
+(*
+    p(Z, h(Z, W), f(W))    
+    
+    X1 = p(X2, X3, X4)
+    X2 = Z
+    X3 = h(X2, X5)
+    X4 = f(X5)
+    X5 = W
+    *)
+    
