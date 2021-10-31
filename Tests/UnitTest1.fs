@@ -1,8 +1,6 @@
 module Tests
 
 open NUnit.Framework
-open mdam.CLI
-open mdam.AST
 open mdam.TermParser
 
 [<SetUp>]

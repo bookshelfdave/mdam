@@ -1,7 +1,6 @@
 namespace mdam
 open System.Collections.Generic
 
-
 type RegMap = Dictionary<string, int>
 
 module AST =
@@ -23,7 +22,7 @@ module AST =
             match this with
             | TVar name -> sprintf "%s" name
             | TFunctor (name, subterms) -> sprintf "%s/%d" name subterms.Length
-            
+
     type L0ExprRegs  =
         | RVar of name:string * regid:int 
         | RFunctor of name:string * subterms:L0ExprRegs list * regid:int 
